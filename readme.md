@@ -1,67 +1,31 @@
-# Express TypeScript API Boilerplate (Modules-Based)
+# Express TS API Boilerplate
 
-Personal boilerplate for building REST APIs with **Express + TypeScript** using a **modules-based structure** (each feature lives in one folder: route/controller/service/repo/types).
+A simple personal boilerplate for building REST APIs with **Express + TypeScript**.
 
-## Stack
+I made this setup so I can start faster without repeating the same basic configuration every time.  
+It already includes environment config, JWT setup, custom error handling, linting, formatting, and a modular folder approach so feature files can stay grouped together and easier to find.
 
-- Node.js + Express
-- TypeScript
-- ESM (`"type": "module"`)
-- Nodemon + TSX (dev)
-- ESLint + Prettier
+---
 
-## Why this repo exists
+## What's inside
 
-This repo is a reusable backend starter so future projects can start fast with:
+- **Express 5**
+- **TypeScript**
+- **NodeNext module system**
+- **dotenv** for environment variables
+- **jsonwebtoken** for auth
+- **custom AppError class**
+- **global error handler middleware**
+- **token verification middleware**
+- **ESLint + Prettier**
+- **nodemon + tsx** for development
 
-- clean TS setup
-- consistent lint + formatting
-- predictable folder structure
-- scalable modules pattern (easy to find files per feature)
+---
 
-## Folder Structure
+## Why I use this setup
 
-express/
-├─ src/
-│ ├─ class/
-│ │ └─ appError.ts
-│ ├─ config/
-│ │ └─ config.ts
-│ ├─ middlewares/
-│ │ └─ errorHandler.ts
-│ ├─ modules/
-│ │ └─ (feature modules live here)
-│ │ ├─ user/
-│ │ │ ├─ user.route.ts
-│ │ │ ├─ user.controller.ts
-│ │ │ ├─ user.service.ts
-│ │ │ ├─ user.repository.ts
-│ │ │ ├─ user.schema.ts
-│ │ │ └─ user.types.ts
-│ │ └─ ...
-│ ├─ routes/
-│ │ └─ app.ts
-│ ├─ app.ts
-│ └─ server.ts
-├─ eslint.config.js
-├─ nodemon.json
-├─ tsconfig.json
-├─ package.json
-├─ package-lock.json
-└─ .prettierrc
+This boilerplate is meant to be a clean starting point for API projects.
 
-## Modules Pattern (how to use it)
+I use a **module-based structure** so each feature can keep its related files close together instead of being scattered across controllers, services, repositories, and validators in separate folders. It just makes things less annoying to navigate.
 
-Each feature goes into `src/modules/<feature>/` so everything related to that feature stays together.
-
-Typical flow:
-route -> controller -> service -> repository
-
-### Responsibilities
-
-- **route**: define endpoints + attach middlewares
-- **controller**: HTTP layer (req/res), call service, return response
-- **service**: business logic
-- **repository**: database/data access (Prisma/SQL/in-memory)
-- **schema**: request validation (if you use Zod/Yup)
-- **types**: TS types/interfaces for the feature
+---
