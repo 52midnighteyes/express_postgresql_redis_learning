@@ -1,6 +1,6 @@
 import express from 'express';
 import { Response, Request, NextFunction } from 'express';
-import { errorHandler } from './middlewares/errorHandler.js';
+import { errorHandler } from './middlewares/errorHandler.middleware.js';
 
 const app = express();
 app.use(express.json());
