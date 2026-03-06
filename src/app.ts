@@ -2,7 +2,7 @@ import express from 'express';
 import { Response, Request, NextFunction } from 'express';
 import { errorHandler } from './middlewares/errorHandler.middleware.js';
 import { NODE_ENV } from './config/config.js';
-import authRouter from './modules/auth/auth.route.js'
+import authRouter from './modules/auth/auth.route.js';
 const app = express();
 app.use(express.json());
 
@@ -25,7 +25,7 @@ app.use((req, res, next) => {
 
 // routes
 
-app.use('/api', authRouter);
+app.use('/api/auth', authRouter);
 
 // error handler
 app.use(errorHandler);

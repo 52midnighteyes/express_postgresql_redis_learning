@@ -1,8 +1,8 @@
 [
   {
-    "id": "c8e86336-6e9f-4e47-80f3-c034d3e526ce",
+    "id": "1cdacdeb-1239-42c6-8760-3e62d05b596c",
     "email": "alwisusilo2@gmail.com",
-    "password": "$argon2id$v=19$m=65536,t=3,p=4$ZgnZzRMHN9l0nMyDrb+ujw$yhfDpRAg+3Z5uTuh0ynaY3fWdGYlipdNi6++31P71+8",
+    "password": "$argon2id$v=19$m=65536,t=3,p=4$m6g/RHfUJFU/YSn0yyzloQ$2gWSrQDtH48DBC/Sy8OFLT4B9l7ZPQnnbleDSO+FnLk",
     "first_name": "alwi",
     "last_name": "susilo",
     "avatar": null,

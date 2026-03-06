@@ -21,3 +21,8 @@ export interface IRegisterParams {
   avatar?: string | null;
   role: ERole;
 }
+
+export interface ILoginParams {
+  email: string;
+  password: string;
+}

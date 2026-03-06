@@ -7,11 +7,7 @@ async function bootstrap() {
   app.listen(PORT, () => {
     console.log(`server is running on port ${PORT}`);
   });
-
-
-  console.log(userDb)
 }
-
 
 bootstrap().catch((err) => {
   console.error('bootstrap failed:', err);
