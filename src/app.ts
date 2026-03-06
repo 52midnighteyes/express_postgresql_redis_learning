@@ -3,6 +3,8 @@ import { Response, Request, NextFunction } from 'express';
 import { errorHandler } from './middlewares/errorHandler.middleware.js';
 import { NODE_ENV } from './config/config.js';
 import authRouter from './modules/auth/auth.route.js';
+import blogRouter from './modules/blog/blog.route.js';
+
 const app = express();
 app.use(express.json());
 
@@ -26,6 +28,7 @@ app.use((req, res, next) => {
 // routes
 
 app.use('/api/auth', authRouter);
+app.use('/api/blogs', blogRouter);
 
 // error handler
 app.use(errorHandler);

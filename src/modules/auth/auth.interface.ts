@@ -1,7 +1,11 @@
+// ------- enum
 export enum ERole {
-  'admin',
-  'user',
+  ADMIN = 'admin',
+  USER = 'user',
 }
+
+// ------- interface
+
 export interface IUser {
   id: string;
   email: string;

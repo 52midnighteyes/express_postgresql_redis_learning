@@ -7,5 +7,14 @@
     "last_name": "susilo",
     "avatar": null,
     "role": "admin"
+  },
+  {
+    "id": "35639f3f-459f-43a0-9618-2bdb7148b64d",
+    "email": "alwisusilo12@gmail.com",
+    "password": "$argon2id$v=19$m=65536,t=3,p=4$JnFXhf01Jj0S51T7xln8Ng$35aNaCLxQj6lTraywpzIlIiCppvdQQ3NJMVQgNtVYvE",
+    "first_name": "alwi",
+    "last_name": "susilo",
+    "avatar": null,
+    "role": "admin"
   }
 ]

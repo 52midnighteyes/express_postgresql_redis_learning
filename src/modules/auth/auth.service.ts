@@ -1,11 +1,13 @@
 import argon2, { verify } from 'argon2';
 import { ILoginParams, IRegisterParams, IUser } from './auth.interface.js';
-import { findUserByEmail, saveUsers } from './auth.repository.js';
+import { saveUsers } from './auth.repository.js';
 import { AppError } from '../../class/appError.js';
 import { randomUUID } from 'node:crypto';
-import { userDb } from './auth.store.js';
+import { findUserByEmail, userCacheByEmail } from './auth.store.js';
 import { JWT_SECRET } from '../../config/config.js';
 import Jwt from 'jsonwebtoken';
+import stringNormalization from '../../helpers/string-normalization.helper.js';
+
 export async function registerUser(params: IRegisterParams) {
   try {
     const isAvail = findUserByEmail(params.email);
@@ -17,7 +19,7 @@ export async function registerUser(params: IRegisterParams) {
 
     const user: IUser = {
       id: randomUUID(),
-      email: params.email.toLowerCase(),
+      email: stringNormalization(params.email),
       password: hashed,
       first_name: params.first_name,
       last_name: params.last_name,
@@ -27,8 +29,8 @@ export async function registerUser(params: IRegisterParams) {
 
     const { password, ...payload } = user;
 
-    userDb.set(user.email, user);
-    const data = Array.from(userDb.values());
+    userCacheByEmail.set(user.email, user);
+    const data = Array.from(userCacheByEmail.values());
     await saveUsers(data);
 
     return payload;

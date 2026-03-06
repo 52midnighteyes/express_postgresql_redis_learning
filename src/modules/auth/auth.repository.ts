@@ -1,7 +1,6 @@
 import fs from 'fs/promises';
 import path from 'path';
 import type { IUser } from './auth.interface.js';
-import { cacheUser, userDb } from './auth.store.js';
 
 const userDbPath = path.join(process.cwd(), 'db', 'user.db.json');
 
@@ -10,10 +9,6 @@ export async function getUsers(): Promise<IUser[]> {
   return JSON.parse(raw) as IUser[];
 }
 
-export function findUserByEmail(email: string): IUser | null {
-return userDb.get(email.toLowerCase()) ?? null
+export async function saveUsers(params: IUser[]) {
+  await fs.writeFile(userDbPath, JSON.stringify(params, null, 2), 'utf-8');
 }
-
-
-export async function saveUsers(params: IUser[]){
- await fs.writeFile(userDbPath, JSON.stringify(params, null, 2), "utf-8")}

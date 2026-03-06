@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from 'express';
-import { ILoginParams, IRegisterParams, IUser } from './auth.interface.js';
+import { ILoginParams, IRegisterParams } from './auth.interface.js';
 import { loginUser, registerUser } from './auth.service.js';
 
 export async function registerController(
@@ -8,11 +8,11 @@ export async function registerController(
   next: NextFunction,
 ) {
   try {
-    const data: IRegisterParams = req.body;
-    const response = await registerUser(data);
+    const params: IRegisterParams = req.body;
+    const response = await registerUser(params);
 
     res.status(201).json({
-      message: 'account has been created',
+      message: 'Account created successfully.',
       data: response,
     });
   } catch (error) {
@@ -20,17 +20,17 @@ export async function registerController(
   }
 }
 
-export async function loginController(
+export async function loginUserController(
   req: Request,
   res: Response,
   next: NextFunction,
 ) {
   try {
-    const data: ILoginParams = req.body;
-    const response = await loginUser(data);
+    const params: ILoginParams = req.body;
+    const response = await loginUser(params);
 
     res.status(201).json({
-      message: 'login sucessfull',
+      message: 'User logged in successfully.',
       data: response,
     });
   } catch (error) {

@@ -1,12 +1,12 @@
 import type { Request, Response, NextFunction } from 'express';
 import { AppError } from '../class/appError.js';
-import { verify } from 'jsonwebtoken';
+import Jwt from 'jsonwebtoken';
 import { JWT_SECRET } from '../config/config.js';
 import { IUserParams } from '../user.js';
 
 export default async function tokenVerification(
   req: Request,
-  res: Response,
+  _res: Response,
   next: NextFunction,
 ) {
   try {
@@ -20,7 +20,7 @@ export default async function tokenVerification(
       throw new AppError(401, 'Invalid Authorization header format', true);
     }
 
-    const verification = verify(token, JWT_SECRET);
+    const verification = Jwt.verify(token, JWT_SECRET);
 
     req.user = verification as IUserParams;
 
