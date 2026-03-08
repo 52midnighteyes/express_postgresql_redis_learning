@@ -1,19 +1,13 @@
 import { IBlog, ICreateBlogParams, IEditBlogParams } from './blog.interface.js';
-import {
-  blogCacheById,
-  blogCacheByTitle,
-  findBlogById,
-  findBlogByTitle,
-} from './blog.store.js';
+import { findBlogById, findBlogByTitle } from './blog.repository.js';
 import { AppError } from '../../class/appError.js';
 import { randomUUID } from 'crypto';
 import { createExcerpt, createSlug } from './blog.helper.js';
-import { saveBlog } from './blog.repository.js';
 import stringNormalization from '../../helpers/string-normalization.helper.js';
 
 export async function createBlog(params: ICreateBlogParams) {
   try {
-    const isExists = findBlogByTitle(params.title);
+    const isExists = await findBlogByTitle(params.title);
     if (isExists) throw new AppError(409, 'Blog title already exists.');
 
     const slug = createSlug(params.title);
@@ -30,11 +24,6 @@ export async function createBlog(params: ICreateBlogParams) {
       updatedAt: new Date().toISOString(),
     };
 
-    blogCacheById.set(blog.id, blog);
-    blogCacheByTitle.set(stringNormalization(blog.title), blog);
-    const blogs = Array.from(blogCacheById.values());
-    await saveBlog(blogs);
-
     return blog;
   } catch (error) {
     console.error('message:', error);
@@ -42,46 +31,46 @@ export async function createBlog(params: ICreateBlogParams) {
   }
 }
 
-export async function editBlog(params: IEditBlogParams) {
-  let newTitleKey = '';
+// export async function editBlog(params: IEditBlogParams) {
+//   let newTitleKey = '';
 
-  try {
-    const found = findBlogById(params.id);
-    if (!found) throw new AppError(404, 'Invalid blog id');
-    if (params.title) {
-      const isExists = findBlogByTitle(params.title);
-      if (isExists && isExists.id !== found.id)
-        throw new AppError(409, 'Blog title already exists.');
-      newTitleKey = stringNormalization(params.title) ?? found.title;
-    }
-    const oldTitleKey = stringNormalization(found.title);
+//   try {
+//     const found = findBlogById(params.id);
+//     if (!found) throw new AppError(404, 'Invalid blog id');
+//     if (params.title) {
+//       const isExists = findBlogByTitle(params.title);
+//       if (isExists && isExists.id !== found.id)
+//         throw new AppError(409, 'Blog title already exists.');
+//       newTitleKey = stringNormalization(params.title) ?? found.title;
+//     }
+//     const oldTitleKey = stringNormalization(found.title);
 
-    const data = {
-      ...found,
-      ...(params.title !== undefined && {
-        title: params.title,
-        slug: createSlug(params.title),
-      }),
-      ...(params.content !== undefined && { content: params.content }),
-      ...(params.category !== undefined && { category: params.category }),
-      ...(params.authorName !== undefined && { authorName: params.authorName }),
-      updatedAt: new Date().toISOString(),
-    };
+//     const data = {
+//       ...found,
+//       ...(params.title !== undefined && {
+//         title: params.title,
+//         slug: createSlug(params.title),
+//       }),
+//       ...(params.content !== undefined && { content: params.content }),
+//       ...(params.category !== undefined && { category: params.category }),
+//       ...(params.authorName !== undefined && { authorName: params.authorName }),
+//       updatedAt: new Date().toISOString(),
+//     };
 
-    if (oldTitleKey !== newTitleKey) {
-      blogCacheByTitle.delete(oldTitleKey);
-    }
+//     // if (oldTitleKey !== newTitleKey) {
+//     //   blogCacheByTitle.delete(oldTitleKey);
+//     // }
 
-    blogCacheById.set(data.id, data);
-    blogCacheByTitle.set(stringNormalization(data.title), data);
-    await saveBlog(Array.from(blogCacheById.values()));
+//     // blogCacheById.set(data.id, data);
+//     // blogCacheByTitle.set(stringNormalization(data.title), data);
+//     // await saveBlog(Array.from(blogCacheById.values()));
 
-    return data;
-  } catch (error) {
-    console.error('message:', error);
-    throw error;
-  }
-}
+//     return data;
+//   } catch (error) {
+//     console.error('message:', error);
+//     throw error;
+//   }
+// }
 
 export function getAllBlogs() {
   return Array.from(blogCacheById.values());

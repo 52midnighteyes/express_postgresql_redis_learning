@@ -1,15 +1,4 @@
-// ------- enum
-export enum EBlogCategory {
-  MATCH = 'match',
-  PLAYER = 'player',
-  TRANSFER = 'transfer',
-  NEWS = 'news',
-  FANS = 'fans',
-  HISTORY = 'history',
-  TRAINING = 'training',
-  EVENT = 'event',
-  MERCH = 'merch',
-}
+import { CategoryEnum } from '../../generated/prisma/enums.js';
 // ------- interface
 
 export interface IBlog {
@@ -19,7 +8,7 @@ export interface IBlog {
   excerpt: string;
   content: string;
   authorName?: string;
-  category: EBlogCategory;
+  category: CategoryEnum;
   createdAt: string;
   updatedAt?: string;
 }
@@ -29,7 +18,7 @@ export interface ICreateBlogParams {
   title: string;
   content: string;
   authorName: string;
-  category: EBlogCategory;
+  category: CategoryEnum;
 }
 
 export interface IEditBlogParams {
@@ -37,5 +26,5 @@ export interface IEditBlogParams {
   title?: string;
   content?: string;
   authorName?: string;
-  category?: EBlogCategory;
+  category?: CategoryEnum;
 }

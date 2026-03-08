@@ -1,29 +1,24 @@
-// ------- enum
-export enum ERole {
-  ADMIN = 'admin',
-  USER = 'user',
-}
-
+import { RoleEnum } from '../../generated/prisma/enums.js';
 // ------- interface
 
 export interface IUser {
   id: string;
   email: string;
   password: string;
-  first_name: string;
-  last_name: string;
+  firstName: string;
+  lastName: string;
   avatar?: string | null;
-  role: ERole;
+  role: RoleEnum;
 }
 
 // ------- params
 export interface IRegisterParams {
   email: string;
   password: string;
-  first_name: string;
-  last_name: string;
+  firstName: string;
+  lastName: string;
   avatar?: string | null;
-  role: ERole;
+  role: RoleEnum;
 }
 
 export interface ILoginParams {
