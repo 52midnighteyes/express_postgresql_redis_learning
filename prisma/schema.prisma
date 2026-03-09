@@ -18,7 +18,7 @@ enum RoleEnum {
 ADMIN
 USER
 
-  @@schema("persija_db")
+@@schema("persija_db")
 
 }
 
@@ -33,7 +33,7 @@ TRAINING
 EVENT
 MERCH
 
-  @@schema("persija_db")
+@@schema("persija_db")
 
 }
 
@@ -48,8 +48,8 @@ model Blog {
   createdAt DateTime @default(now())
   updatedAt DateTime?
 
-    @@schema("persija_db")
-
+  @@index([id, slug])
+  @@schema("persija_db")
 }
 
 model User {
@@ -63,7 +63,9 @@ model User {
   createdAt DateTime @default(now())
   deletedAt DateTime?
 
-    @@schema("persija_db")
+
+  @@index([id, email])
+  @@schema("persija_db")
 
 }
 
@@ -73,6 +75,5 @@ model EmailForm {
   message String
   createdAt DateTime @default(now())
 
-    @@schema("persija_db")
-
+  @@schema("persija_db")
 }

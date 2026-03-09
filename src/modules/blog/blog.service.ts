@@ -88,7 +88,7 @@ export async function getAllBlogs() {
 
 export async function getBlogById(id: string) {
   try {
-    const found = findBlogById(id);
+    const found = await findBlogById(id);
     if (!found) throw new AppError(404, 'Invalid blog id');
 
     return found;
