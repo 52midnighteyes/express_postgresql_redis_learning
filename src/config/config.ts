@@ -19,7 +19,7 @@ function toNumber(value: string | undefined, fallback: number): number {
 export const config = {
   PORT: toNumber(process.env.PORT, 8000),
   JWT_SECRET: required('JWT_SECRET'),
-  NODE_ENV: process.env.NODE_ENV ?? 'development',
+  NODE_ENV: required('NODE_ENV') ?? 'development',
   DIRECT_URL: required('DIRECT_URL'),
   DATABASE_URL: required('DATABASE_URL'),
   REDIS_PORT: required('REDIS_PORT'),

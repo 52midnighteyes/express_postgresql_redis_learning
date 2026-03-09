@@ -1,8 +1,6 @@
 import app from './app.js';
 import { PORT } from './config/config.js';
 import { connectRedis, redisClient } from './libs/redis/redis.js';
-import { cacheUsers } from './modules/auth/auth.store.js';
-import { cacheBlogs } from './modules/blog/blog.store.js';
 
 async function bootstrap() {
   await connectRedis();

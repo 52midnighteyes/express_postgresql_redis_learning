@@ -9,8 +9,8 @@ export interface IBlog {
   content: string;
   authorName?: string;
   category: CategoryEnum;
-  createdAt: string;
-  updatedAt?: string;
+  createdAt: Date;
+  updatedAt?: Date | null;
 }
 
 // ------- params
@@ -21,10 +21,27 @@ export interface ICreateBlogParams {
   category: CategoryEnum;
 }
 
-export interface IEditBlogParams {
+export interface ICreateBlogDb {
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  authorName: string;
+  category: CategoryEnum;
+}
+
+export interface IUpdateBlogParams {
   id: string;
   title?: string;
   content?: string;
   authorName?: string;
   category?: CategoryEnum;
+}
+
+export interface IUpdateBlogDb {
+  title?: string;
+  content?: string;
+  authorName?: string;
+  category?: CategoryEnum;
+  updatedAt: Date | null;
 }

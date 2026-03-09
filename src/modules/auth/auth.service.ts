@@ -11,7 +11,7 @@ import { omit } from '../../helpers/omit.helper.js';
 
 export async function registerUser(params: IRegisterParams) {
   try {
-    const isAvail = await findUserByEmail(params.email);
+    const isAvail = await findUserByEmail(params.email, prisma);
     if (isAvail)
       throw new AppError(409, 'user with that email is already exits!', true);
 

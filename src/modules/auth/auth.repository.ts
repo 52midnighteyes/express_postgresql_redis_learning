@@ -10,7 +10,7 @@ export async function findUserByEmail(email: string, db: TPrisma = prisma) {
   });
 }
 
-export async function findUserById(id: string, db: TPrisma) {
+export async function findUserById(id: string, db: TPrisma = prisma) {
   return await db.user.findUnique({
     where: {
       id,
@@ -18,7 +18,7 @@ export async function findUserById(id: string, db: TPrisma) {
   });
 }
 
-export async function createUserRepo(params: IUser, db: TPrisma) {
+export async function createUserRepo(params: IUser, db: TPrisma = prisma) {
   return await db.user.create({
     data: {
       ...params,

@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
-import { ICreateBlogParams, IEditBlogParams } from './blog.interface.js';
+import { ICreateBlogParams, IUpdateBlogParams } from './blog.interface.js';
 import {
   createBlog,
-  editBlog,
   getAllBlogs,
   getBlogById,
+  updateBlog,
 } from './blog.service.js';
 
 export async function createBlogController(
@@ -25,7 +25,7 @@ export async function createBlogController(
   }
 }
 
-export async function editBlogController(
+export async function updateBlogController(
   req: Request,
   res: Response,
   next: NextFunction,
@@ -33,7 +33,7 @@ export async function editBlogController(
   try {
     const params = req.body;
     const { id } = req.params;
-    const response = await editBlog({ ...params, id } as IEditBlogParams);
+    const response = await updateBlog({ ...params, id } as IUpdateBlogParams);
     console.log(response);
 
     res.status(200).json({
@@ -51,7 +51,7 @@ export async function getAllBlogsController(
   next: NextFunction,
 ) {
   try {
-    const response = getAllBlogs();
+    const response = await getAllBlogs();
 
     res.status(200).json({
       message: 'Blogs fetched successfully.',
@@ -69,7 +69,7 @@ export async function getBlogByIdController(
 ) {
   try {
     const { id } = req.params;
-    const response = getBlogById(id as string);
+    const response = await getBlogById(id as string);
 
     res.status(200).json({
       message: 'Blog fetched successfully.',

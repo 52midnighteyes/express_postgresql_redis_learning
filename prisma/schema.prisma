@@ -11,11 +11,15 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  schemas  = ["persija_db"]
 }
 
 enum RoleEnum {
 ADMIN
 USER
+
+  @@schema("persija_db")
+
 }
 
 enum CategoryEnum {
@@ -28,6 +32,9 @@ HISTORY
 TRAINING
 EVENT
 MERCH
+
+  @@schema("persija_db")
+
 }
 
 model Blog {
@@ -38,8 +45,11 @@ model Blog {
   content String
   authorName String
   category CategoryEnum @default(NEWS)
-  ceatedAt DateTime @default(now())
+  createdAt DateTime @default(now())
   updatedAt DateTime?
+
+    @@schema("persija_db")
+
 }
 
 model User {
@@ -52,6 +62,9 @@ model User {
   role RoleEnum @default(USER)
   createdAt DateTime @default(now())
   deletedAt DateTime?
+
+    @@schema("persija_db")
+
 }
 
 model EmailForm {
@@ -59,4 +72,7 @@ model EmailForm {
   email String
   message String
   createdAt DateTime @default(now())
+
+    @@schema("persija_db")
+
 }
